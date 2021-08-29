@@ -1,5 +1,5 @@
 import App from "next/app";
-import Layout from '../components/_App/Layout'
+import Layout from "../components/_App/Layout";
 
 class MyApp extends App {
   render() {
@@ -8,7 +8,7 @@ class MyApp extends App {
       <Layout>
         <Component />
       </Layout>
-    )
+    );
   }
 }
 
