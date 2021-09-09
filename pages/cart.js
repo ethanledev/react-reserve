@@ -4,12 +4,31 @@ import CartSummary from '../components/Cart/CartSummary'
 import { parseCookies } from 'nookies'
 import axios from 'axios'
 import baseUrl from '../utils/baseUrl'
+import { useState } from 'react'
+import cookie from 'js-cookie'
 
 function Cart({ products, user }) {
+  const [cartProducts, setCartProducts] = useState(products)
+
+  async function handleRemoveFromCart(productId) {
+    const url = `${baseUrl}/api/cart`
+    const token = cookie.get('token')
+    const payload = {
+      params: { productId },
+      headers: { Authorization: token }
+    }
+    const response = await axios.delete(url, payload)
+    setCartProducts(response.data)
+  }
+
   return (
     <Segment>
-      <CartItemList user={user} products={products}/>
-      <CartSummary products={products}/>
+      <CartItemList 
+        handleRemoveFromCart={handleRemoveFromCart}
+        user={user} 
+        products={cartProducts}
+      />
+      <CartSummary products={cartProducts}/>
     </Segment>
   )
 }
