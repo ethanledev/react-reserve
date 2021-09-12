@@ -1,7 +1,7 @@
 import { Card } from 'semantic-ui-react'
 
 function ProductList({ products }) {
-  function mapProductsToItems(products) {
+  function mapProductsToItems() {
     return products.map(product => ({
       header: product.name,
       image: product.mediaUrl,
@@ -17,7 +17,7 @@ function ProductList({ products }) {
     itemsPerRow='3' 
     centered
     stackable
-    items={mapProductsToItems(products)}
+    items={mapProductsToItems()}
   />)
 }
 
